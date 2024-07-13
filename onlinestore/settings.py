@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-3j8v_l^k2ijlvfn*_nh^p15&fjd5dv^_z39^$o0vtzu=niub70
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["onlinestore-app.onrender.com", " "]
+# ALLOWED_HOSTS = ["onlinestore-app.onrender.com", " "]
+ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'core.CustomUser'
 
@@ -113,7 +114,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse("postgres://online_market_place_user:tHEVW3Lrp7AWl4Ba7ibBD2occcGCCvCz@dpg-cpod23aju9rs738mmd20-a.oregon-postgres.render.com/online_market_place")
+# DATABASES['default'] = dj_database_url.parse("postgres://online_market_place_user:tHEVW3Lrp7AWl4Ba7ibBD2occcGCCvCz@dpg-cpod23aju9rs738mmd20-a.oregon-postgres.render.com/online_market_place")
 
 #
 
@@ -150,17 +151,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-# This production code might break development mode, so we check whether we're in DEBUG mode
-if not DEBUG:
-    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
-    # and renames the files with unique names for each version to support long-term caching
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
-
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
